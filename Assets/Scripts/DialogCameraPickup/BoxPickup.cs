@@ -7,8 +7,7 @@ public class BoxPickup : MonoBehaviour
     public float rotationSpeed = 500.0f;
 
     bool isInTrigger = false;
-    public float yval = 0;
-
+    
     bool isPickedUp = false;
 
     //rotate the pickup based on the difference from last mouse position to this.
@@ -16,11 +15,7 @@ public class BoxPickup : MonoBehaviour
 
     public Camera theCamera;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+ 
 
     // Update is called once per frame
     void Update()
@@ -28,10 +23,12 @@ public class BoxPickup : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && isPickedUp)
         {
+            //DROP THE OBJ 
+
             transform.parent = null;
 
             //restore scale
-            transform.localScale *= 4.0f;
+            transform.localScale = Vector3.one;
 
             Vector3 fwd = Camera.main.transform.forward * 2.0f;
             
@@ -52,10 +49,9 @@ public class BoxPickup : MonoBehaviour
             Vector3 fwd = new Vector3(0, 0, 1);
 
             transform.localPosition = fwd;
-
-
-
-            transform.localScale /= 4.0f;
+            
+            //make it smaller
+            transform.localScale = Vector3.one / 4.0f;
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -67,6 +63,8 @@ public class BoxPickup : MonoBehaviour
         if(isPickedUp)
         {
             
+            //Examine it TODO: improve!!!
+
             Vector3 dir = previousMousePos - Input.mousePosition;
             //XY inverted in world space
             float x = dir.x;

@@ -85,7 +85,12 @@ public class DialogueCamera : MonoBehaviour
         playerCamera.SetActive(true);
         playerController.enabled = true;
 
-        Transform pickup = playerDiaCamOBJ.transform.GetChild(0);
+        Transform pickup = null;
+
+        if (playerDiaCamOBJ.transform.childCount > 0)
+        {
+            pickup = playerDiaCamOBJ.transform.GetChild(0);
+        }
 
         //if the diaCam also had a pickup/manipulate object, swap ownership
         if(pickup)
