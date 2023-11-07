@@ -7,10 +7,12 @@ public class Combat : MonoBehaviour
 
     [SerializeField] Combat OpponentCombat;
 
+    public Transform Weapons;
+
     bool isInCombat = false;
 
     float timer = -1;
-    public float attackTime = 1.0f;
+    public float cooldownSeconds = 1.0f;
 
     public int attackType;
 
@@ -27,29 +29,36 @@ public class Combat : MonoBehaviour
         {
 
             Debug.Log("fighting");
-            if(Time.time - timer > attackTime)
+            if(Time.time - timer > cooldownSeconds)
             {
                 timer = Time.time;
-                attackType = Random.Range(0, 3);
+                attackType = Random.Range(0, Weapons.childCount);
 
                 //0 is scissor
+                int scissors = 0;
                 //1 is paper
-                //3 is rock                
+                int paper = 1;
+                //2 is rock                
+                int rock = 2;
 
                 //resolve combat
 
-                Debug.Log(transform.name + "attacks with " + attackType + " vs. " + OpponentCombat.attackType);
+                Transform weapon = Weapons.GetChild(attackType);
+                Transform opponentWeapon = OpponentCombat.Weapons.GetChild(OpponentCombat.attackType);
 
-                if (attackType == 0 && OpponentCombat.attackType == 1)
+
+                Debug.Log(transform.name + "attacks with " + weapon.name + " vs. " + opponentWeapon.name);
+
+                if (attackType == scissors && OpponentCombat.attackType == paper)
                     Debug.Log(transform.name + "wins");
 
-                if (attackType == 0 && OpponentCombat.attackType == 3)
-                    Debug.Log(transform.name + "loses");
-
-                if (attackType == 1 && OpponentCombat.attackType == 3)
+                else if (attackType == paper && OpponentCombat.attackType == rock)
                     Debug.Log(transform.name + "wins");
 
-                if (attackType == 3 && OpponentCombat.attackType == 1)
+                else if (attackType == 1 && OpponentCombat.attackType == 2)
+                    Debug.Log(transform.name + "wins");
+
+                else
                     Debug.Log(transform.name + "loses");
 
             }
