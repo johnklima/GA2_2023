@@ -2,16 +2,16 @@
 
 x First/Third Person Controller
 Bee Controller
-NPCs (Nav Mesh Agents)
+x NPCs (Nav Mesh Agents)
 x Item Pickup/Manipulate/Place
 Elevators
 Item Highlighting
 Damage/Combat
 Crafting/Item Repair
 
-Inventory
-	pickup and add to 2d gui
-	click in gui to show in examine mode
-	use object in correct place
+x Inventory
+	x pickup and add to 2d gui
+	x click in gui to show in examine mode
+	x use object in correct place
 	
-Portals
+x Portals and mirrors
