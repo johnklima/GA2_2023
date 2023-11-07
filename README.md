@@ -1,13 +1,15 @@
 # GA2_2023
 
 x First/Third Person Controller
-Bee Controller
+? Bee Controller
 x NPCs (Nav Mesh Agents)
 x Item Pickup/Manipulate/Place
 Elevators
 Item Highlighting
-Damage/Combat
+x Damage/Combat
+
 Crafting/Item Repair
+Questing
 
 x Inventory
 	x pickup and add to 2d gui
