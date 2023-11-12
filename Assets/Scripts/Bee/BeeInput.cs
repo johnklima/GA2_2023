@@ -5,10 +5,9 @@ using UnityEngine;
 public class BeeInput : MonoBehaviour
 {
 
-    public float turnSpeed = 100.0f;  //gameplay balance
-    public float moveSpeed = 10.0f;
     
     BeeMovement moveBee = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +32,10 @@ public class BeeInput : MonoBehaviour
         transform.position += transform.forward * inForward * moveSpeed * Time.deltaTime;
         */
 
+
         //poke into BeeMovement physics
+        moveBee.applyTorque(transform.up * inTurn );
+        moveBee.applyThrust(transform.forward * inForward );
+
     }
 }
