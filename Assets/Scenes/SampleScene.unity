@@ -6113,12 +6113,11 @@ GameObject:
   - component: {fileID: 721323938}
   - component: {fileID: 721323937}
   - component: {fileID: 721323936}
-  - component: {fileID: 721323941}
   - component: {fileID: 721323942}
   - component: {fileID: 721323943}
   m_Layer: 0
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6193,31 +6192,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721323935}
-  m_LocalRotation: {x: -0, y: 0.47001672, z: -0, w: 0.8826576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 26.68, y: 26.5, z: 15.93}
   m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 56.071, z: 0}
---- !u!114 &721323941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721323935}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8bfb5d4cb8367842b127f1d4d26aa7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: {x: 0, y: 0, z: 0}
-  torque: {x: 0, y: 0, z: 0}
-  pitchForce: 1
-  fwdForce: 1
-  turnForce: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &721323942
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6230,24 +6212,18 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &721323943
-MonoBehaviour:
+--- !u!81 &721323943
+AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721323935}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f9ad00b94f01f045a67248e1cdb57b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalForce: {x: 0, y: 0, z: 0}
-  body: {fileID: 0}
 --- !u!1 &806925726
 GameObject:
   m_ObjectHideFlags: 0
@@ -6661,7 +6637,6 @@ GameObject:
   m_Component:
   - component: {fileID: 888179484}
   - component: {fileID: 888179483}
-  - component: {fileID: 888179482}
   - component: {fileID: 888179485}
   m_Layer: 0
   m_Name: Camera
@@ -6670,14 +6645,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &888179482
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 888179481}
-  m_Enabled: 1
 --- !u!20 &888179483
 Camera:
   m_ObjectHideFlags: 0
@@ -6745,10 +6712,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 888179481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 379fe582524c5e540bc6febb2957d7bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b1996d75b12a194cae62fcb494d526d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 721323939}
+  target: {fileID: 721323935}
+  mouseSensitivity: 10
+  dstFromTarget: 3
+  pitchMinMax: {x: -40, y: 85}
+  rotationSmoothTime: 0.12
+  lockCursor: 0
+  lockMovement: 0
+  currentRotation: {x: 0, y: 0, z: 0}
+  yaw: 0
+  pitch: 0
+  roll: 0
 --- !u!1 &889941439
 GameObject:
   m_ObjectHideFlags: 0
@@ -8801,7 +8778,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23336
+  m_Name: pb_Mesh24644
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

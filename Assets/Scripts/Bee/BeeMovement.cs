@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gravity : MonoBehaviour {
+public class BeeMovement : MonoBehaviour {
 
 
     //gravity in meters per second per second
     public float GRAVITY_CONSTANT = -9.8f;                      // -- for earth,  -1.6 for moon 
+    public float decay = 0.5f;                                  //reduce velocity over time (friction???)
 
-    public Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
-    public Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
-    public Vector3 finalForce = new Vector3(0, 0, 0);           //final force to be applied this frame
 
-    public Vector3 jump = new Vector3(0, 0, 0); 
-    public Vector3 bounce = new Vector3(0, 0, 0); 
-    public Vector3 thrust = new Vector3(0, 0, 0);               //player applied thrust vector
-    public Vector3 impulse = new Vector3(0, 0, 0);
-    public bool friction = false;
+    [SerializeField] Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
+    [SerializeField] Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
+    [SerializeField] Vector3 finalForce = new Vector3(0, 0, 0);           //final force to be applied this frame
+
+    [SerializeField] Vector3 jump = new Vector3(0, 0, 0);
+
+    [SerializeField] Vector3 bounce = new Vector3(0, 0, 0);
+    [SerializeField] Vector3 thrust = new Vector3(0, 0, 0);               //player applied thrust vector
+    [SerializeField] Vector3 impulse = new Vector3(0, 0, 0);
+    
+    //public bool friction = false;
 
     public float mass = 1.0f;
     public float energy = 10000.0f;
-
-    
+       
     
     Vector3 prevPosition;
 
@@ -40,9 +43,7 @@ public class gravity : MonoBehaviour {
 
 
     }
-
     
-
     public void applyJump(float force)
     {
 
@@ -51,29 +52,28 @@ public class gravity : MonoBehaviour {
          
     }
 
-    public void applyJetpack(Vector3 jetforce)
+    public void applyThrust(Vector3 force)
     {
 
         //one frame thrust, continuous if key is held 
-        thrust = jetforce;
+        thrust = force;
 
-        //maybe antigrav here? otherwise jetforce must be > GRAVITY_CONSTANT
+        //maybe antigrav here? otherwise jetforce must be > GRAVITY_CONSTANT on the Y axis
     }
 
-    void antiGrav(float dt) 
+    public void applyImpulse(Vector3 force)
     {
-        finalForce.Set(0, -GRAVITY_CONSTANT * mass, 0);
-        
+        impulse = force;
+    }
 
-        acceleration = finalForce / mass;
-        velocity += acceleration * dt;
-
+    public void applyBouce(Vector3 force)
+    {
+        bounce = force;
     }
 
     void handleMovement()
     {
         float dt = Time.deltaTime;
-           
 
         //reset final force to the initial force of gravity
         finalForce.Set(0, GRAVITY_CONSTANT * mass, 0);
@@ -89,6 +89,9 @@ public class gravity : MonoBehaviour {
         //as is impulse (explosion)
         velocity += impulse;
 
+        //add bounce
+        velocity += bounce;
+
         //resets
         thrust = Vector3.zero;
         jump = Vector3.zero;
@@ -100,16 +103,15 @@ public class gravity : MonoBehaviour {
 
         //move the object
         transform.position += velocity * dt;
-       
-        
 
-    }
-    public void applyImpulse(Vector3 imp)
-    {
-        impulse = imp;
-    }
+        Vector3 velo = velocity; 
+        velo.x *= decay;
+        velo.z *= decay;
 
-    public void clampVelocity(float max)
+        velocity = velo;
+    }
+ 
+    private void clampVelocity(float max)
     {
         //GENERAL RULE OF VELOCITY : don't let them go too fast!!!        
         float maxSpeedSquared = max * max;
