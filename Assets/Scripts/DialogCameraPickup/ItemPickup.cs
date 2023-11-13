@@ -50,12 +50,17 @@ public class ItemPickup : MonoBehaviour
     void Update()
     {
 
-        //I am in the trigger, it is not picked up, and it is not trying to return it
+        //I am in the trigger, it is not picked up, and it is not trying to return its initial position
+        //BTW: there is a better way to handle state machines, but I'm not sure you are ready...
         if (Input.GetKeyDown(KeyCode.E) && isInTrigger && !isPickedUp && !doReturnPosition)
         {
-            Debug.Log("Collided with Player and Player pressed E Key");
+            Debug.Log("Collided with Player and Player pressed E Key"
+                        + " isPicked up "  + isPickedUp 
+                        + " isInTrigger " + isInTrigger 
+                        + " doReturnPosition " + doReturnPosition
+                        );  //perfectly valid multiline statement so it fits all in the code window
 
-            //cache its initial transform state
+            //cache its initial transform state, where it was placed in the world to start
             initialPosition = transform.position;
             initialRotation = transform.rotation;
             
@@ -80,6 +85,8 @@ public class ItemPickup : MonoBehaviour
             
         }
         //if I have picked it up, and have not yet started the drop
+        //else is critical, as we are working off E key press in a toggle
+        //code can be simplified if we use R to drop
         else if (Input.GetKeyDown(KeyCode.E) && isPickedUp && isInHoldPosition)
         {
             //DROP THE OBJ 
@@ -96,12 +103,13 @@ public class ItemPickup : MonoBehaviour
 
         }
         //if picked up, but not in hold position, and not moving to hold position
+        //else is critical again to avoid button bashing
         else if (isPickedUp && !isInHoldPosition && !doHoldPosition)
         {
 
             Debug.Log("do hold");
 
-            //start interpolate to position/rotation
+            //start interpolate to camera position/rotation
             doHoldPosition = true;           
 
         }
@@ -177,7 +185,7 @@ public class ItemPickup : MonoBehaviour
     {
         //if not the player ignore and scoot out of this method
         if (other.tag != "Player")
-            return;
+            return;  //code below does not execute if we are not the player
 
         isInTrigger = true;
        
@@ -187,7 +195,7 @@ public class ItemPickup : MonoBehaviour
     {
         //if not the player ignore and scoot out of this method
         if (other.tag != "Player")
-            return;
+            return; //code below does not execute if we are not the player
 
         isInTrigger = false;
     }
