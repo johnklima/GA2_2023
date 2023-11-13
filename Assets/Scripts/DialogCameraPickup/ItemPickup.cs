@@ -11,7 +11,8 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] bool doHoldPosition = false;   //should I move it to its hand held position
     [SerializeField] bool isInHoldPosition = false; //is it being held
     [SerializeField] float objViewDistance = 0.5f;  //how much in front of the camera do look at it (may vary by obj size)
-    
+    [SerializeField] Light spotLight;               //turn off and on a highlighter
+
     public Camera theCamera;        //which camera (could be a second viewport camera)
 
 
@@ -84,8 +85,8 @@ public class ItemPickup : MonoBehaviour
             isPickedUp = true;
             
         }
-        //if I have picked it up, and have not yet started the drop
-        //else is critical, as we are working off E key press in a toggle
+        //if I have picked it up, and have not yet started the drop.
+        //else is critical, as we are working off E key press in a toggle.
         //code can be simplified if we use R to drop
         else if (Input.GetKeyDown(KeyCode.E) && isPickedUp && isInHoldPosition)
         {
@@ -102,16 +103,12 @@ public class ItemPickup : MonoBehaviour
             startRotation = transform.rotation;
 
         }
-        //if picked up, but not in hold position, and not moving to hold position
+        //if picked up, but not in hold position, and not moving to hold position.
         //else is critical again to avoid button bashing
         else if (isPickedUp && !isInHoldPosition && !doHoldPosition)
         {
-
-            Debug.Log("do hold");
-
             //start interpolate to camera position/rotation
-            doHoldPosition = true;           
-
+            doHoldPosition = true;  
         }
 
 
@@ -129,6 +126,8 @@ public class ItemPickup : MonoBehaviour
         }
 
     }
+
+    //the state movement handler for holding
     void DoHold()
     {
         //increment time complete %
@@ -154,7 +153,7 @@ public class ItemPickup : MonoBehaviour
         }
 
     }
-    
+    //the state movement handler for return to initial position
     void DoReturn()
     {
         //increment time complete %
@@ -188,6 +187,9 @@ public class ItemPickup : MonoBehaviour
             return;  //code below does not execute if we are not the player
 
         isInTrigger = true;
+        
+        if (spotLight)
+            spotLight.gameObject.SetActive(true);
        
     }
 
@@ -198,6 +200,10 @@ public class ItemPickup : MonoBehaviour
             return; //code below does not execute if we are not the player
 
         isInTrigger = false;
+
+        if (spotLight)
+            spotLight.gameObject.SetActive(false);
+
     }
 
 }
