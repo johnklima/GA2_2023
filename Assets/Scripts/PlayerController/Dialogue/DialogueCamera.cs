@@ -32,6 +32,7 @@ public class DialogueCamera : MonoBehaviour
 
     bool bInDialogue = false;
 
+    bool isInTrigger = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,11 +51,17 @@ public class DialogueCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.E) && isInTrigger && bInDialogue == false)
+        {
+            EnableDialogueCamera();
+            bInDialogue = true;
+        }
+
 
         MoveDiaCam(); // Calls the function allowing us to move smoothly
 
 
-        if(Input.GetKeyDown(KeyCode.Space)) // Temporary methood to get the player out of dialogue mode, you can call this function however you'd like though!
+        if(Input.GetKeyDown(KeyCode.R)) // Temporary methood to get the player out of dialogue mode, you can call this function however you'd like though!
         {
             DisableDialogueCamera(); //  <-- Copy this and place it at the end of your dialogue or call it in a different script since its a public function!
         }
@@ -119,7 +126,7 @@ public class DialogueCamera : MonoBehaviour
         bInDialogue = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void myOnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
@@ -127,6 +134,23 @@ public class DialogueCamera : MonoBehaviour
             bInDialogue = true;
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            isInTrigger = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            isInTrigger = false;
+            DisableDialogueCamera();
+        }
+    }
+
 
     private void MoveDiaCam()
     {

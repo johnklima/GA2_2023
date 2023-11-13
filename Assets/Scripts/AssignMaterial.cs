@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[ExecuteInEditMode]
 public class AssignMaterial : MonoBehaviour
 {
 
     public Material[] materials;
 
     // Start is called before the first frame update
+    
     void Start()
     {
         int i = 0;

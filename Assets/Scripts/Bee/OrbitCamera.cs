@@ -58,7 +58,7 @@ public class OrbitCamera : MonoBehaviour
 
     void CameraMovement()
     {
-        yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
+        //yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
         pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
 
