@@ -7,7 +7,7 @@ public class ItemPickup : MonoBehaviour
     
     [SerializeField] bool isInTrigger = false;      //am I in the trigger so I can well process a key press?
     [SerializeField] bool isPickedUp = false;       //is the object picked up?
-    [SerializeField] bool doReturnPosition = false; //should I know return it to its initial position
+    [SerializeField] bool doReturnPosition = false; //should I now return it to its initial position
     [SerializeField] bool doHoldPosition = false;   //should I move it to its hand held position
     [SerializeField] bool isInHoldPosition = false; //is it being held
     [SerializeField] float objViewDistance = 0.5f;  //how much in front of the camera do look at it (may vary by obj size)
@@ -188,6 +188,7 @@ public class ItemPickup : MonoBehaviour
 
         isInTrigger = true;
         
+        //turn on the light when I step into the space
         if (spotLight)
             spotLight.gameObject.SetActive(true);
        
@@ -201,6 +202,7 @@ public class ItemPickup : MonoBehaviour
 
         isInTrigger = false;
 
+        //turn off the light when I step out of the space
         if (spotLight)
             spotLight.gameObject.SetActive(false);
 
