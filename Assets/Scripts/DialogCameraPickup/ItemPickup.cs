@@ -10,7 +10,7 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] bool doReturnPosition = false; //should I now return it to its initial position
     [SerializeField] bool doHoldPosition = false;   //should I move it to its hand held position
     [SerializeField] bool isInHoldPosition = false; //is it being held
-    [SerializeField] float objViewDistance = 0.5f;  //how much in front of the camera do look at it (may vary by obj size)
+    [SerializeField] float objViewDistance = 0.5f;  //how much in front of the camera to look at it (may vary by obj size)
     [SerializeField] Light spotLight;               //turn off and on a highlighter
 
     public Camera theCamera;        //which camera (could be a second viewport camera)
@@ -32,6 +32,11 @@ public class ItemPickup : MonoBehaviour
 
     float time = 0;     //time to measure interpolation completion (0.0f to 1.0f)
 
+    [SerializeField] AudioSource pickupSource;
+    [SerializeField] AudioSource putdownSource;
+    [SerializeField] AudioSource moveSource;
+
+
     private void Start()
     {
 
@@ -45,8 +50,19 @@ public class ItemPickup : MonoBehaviour
         //get its controller
         cameraController = theCamera.transform.GetComponent<CameraContoller>();
     
+        if(moveSource)
+        {
+            moveSource.Play();
+            moveSource.Pause();
+        }
+
     }
 
+
+    public bool hasBeenPicked()
+    {
+        return isPickedUp;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -56,7 +72,7 @@ public class ItemPickup : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && isInTrigger && !isPickedUp && !doReturnPosition)
         {
             Debug.Log("Collided with Player and Player pressed E Key"
-                        + " isPicked up "  + isPickedUp 
+                        + " isPicked up "  + isPickedUp
                         + " isInTrigger " + isInTrigger 
                         + " doReturnPosition " + doReturnPosition
                         );  //perfectly valid multiline statement so it fits all in the code window
@@ -81,6 +97,14 @@ public class ItemPickup : MonoBehaviour
             transform.position = initialPosition;
             transform.rotation = initialRotation;
 
+            //play sound if I have one
+            if (pickupSource)
+                pickupSource.Play();
+
+            //play sound if I have one
+            if (moveSource)
+                moveSource.UnPause();
+
             //it is picked up
             isPickedUp = true;
             
@@ -91,6 +115,10 @@ public class ItemPickup : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.E) && isPickedUp && isInHoldPosition)
         {
             //DROP THE OBJ 
+
+            if (moveSource)
+                moveSource.UnPause();
+
 
             playerController.enabled = true;
             cameraController.enabled = true;
@@ -143,6 +171,14 @@ public class ItemPickup : MonoBehaviour
             transform.position = goalPosition;
             transform.rotation = goalRotation;
 
+            //play sound if I have one
+            if (putdownSource)
+                putdownSource.Play();
+
+            //play sound if I have one
+            if (moveSource)
+                moveSource.Pause();
+
             time = 0;
 
             //no longer trying to hold
@@ -151,6 +187,8 @@ public class ItemPickup : MonoBehaviour
             isInHoldPosition = true;
 
         }
+
+
 
     }
     //the state movement handler for return to initial position
@@ -168,7 +206,14 @@ public class ItemPickup : MonoBehaviour
             //snap to be sure
             transform.position = initialPosition;
             transform.rotation = initialRotation;
-            
+
+            //play sound if I have one
+            if (putdownSource)
+                putdownSource.Play();
+
+            if (moveSource)
+                moveSource.Pause();
+
             //reset time
             time = 0;
 

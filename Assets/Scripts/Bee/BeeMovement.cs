@@ -42,6 +42,8 @@ public class BeeMovement : MonoBehaviour {
     Vector3 prevPosition;       //last known good position
     Quaternion prevRotation;    //last known good rotation
 
+    public BeeCamera beeCam;
+
     // Use this for initialization
     void Start() 
     {
@@ -51,11 +53,14 @@ public class BeeMovement : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
 
-        
         handleMovement();
+
+        beeCam.BeeUpdate();
+
+        
 
         prevPosition = transform.position; //buffer last position for collisions (separate class perhaps?)
 
@@ -125,7 +130,7 @@ public class BeeMovement : MonoBehaviour {
         torque = Vector3.zero;
 
         //clamp velocity (terminal velocity)
-        smoothClampVelocity(maxVelocity); //meters per second max
+        //smoothClampVelocity(maxVelocity); //meters per second max
 
         //move the object
         transform.position += velocity * dt;
