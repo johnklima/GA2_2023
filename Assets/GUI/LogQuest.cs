@@ -9,7 +9,6 @@ using TMPro;
 public class LogQuest : MonoBehaviour
 {
 
-
     public ItemPickup[] logs;           //array of items to listen to
 
     public bool[] isPicked;             //track if item has been picked
@@ -50,7 +49,7 @@ public class LogQuest : MonoBehaviour
                 //quest complete
                 isComplete = true;
 
-                //script can be disabled
+                //script can now be disabled (properties are still accessable)
                 this.enabled = false;
             }
         }
