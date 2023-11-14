@@ -27,7 +27,7 @@ public class LogQuest : MonoBehaviour
         for (int i = 0; i < logs.Length; i++ )
         {
             //has it been picked
-            if(logs[i].hasBeenPicked())
+            if(logs[i].HasBeenPicked())
             {
                 //if not yet accounted
                 if (isPicked[i] == false)

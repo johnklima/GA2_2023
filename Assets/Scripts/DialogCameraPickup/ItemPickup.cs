@@ -10,6 +10,9 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] bool doReturnPosition = false; //should I now return it to its initial position
     [SerializeField] bool doHoldPosition = false;   //should I move it to its hand held position
     [SerializeField] bool isInHoldPosition = false; //is it being held
+    [SerializeField] bool hasBeenPicked = false;    //has it been picked once
+
+
     [SerializeField] float objViewDistance = 0.5f;  //how much in front of the camera to look at it (may vary by obj size)
     [SerializeField] Light spotLight;               //turn off and on a highlighter
 
@@ -59,9 +62,9 @@ public class ItemPickup : MonoBehaviour
     }
 
 
-    public bool hasBeenPicked()
+    public bool HasBeenPicked()
     {
-        return isPickedUp;
+        return hasBeenPicked;
     }
     // Update is called once per frame
     void Update()
@@ -107,6 +110,9 @@ public class ItemPickup : MonoBehaviour
 
             //it is picked up
             isPickedUp = true;
+
+            //it has been picked up once
+            hasBeenPicked = true;
             
         }
         //if I have picked it up, and have not yet started the drop.
