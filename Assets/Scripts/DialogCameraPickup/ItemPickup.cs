@@ -235,7 +235,10 @@ public class ItemPickup : MonoBehaviour
     Material mat;
     private void OnTriggerEnter(Collider other)
     {
-        
+        //if not the player ignore and scoot out of this method
+        if (other.tag != "Player")
+            return; //code below does not execute if we are not the player
+
         //turn on the light when I step into the space
         if (spotLight)
             spotLight.gameObject.SetActive(true);
