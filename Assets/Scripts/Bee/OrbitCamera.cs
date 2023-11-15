@@ -56,7 +56,10 @@ public class OrbitCamera : MonoBehaviour
     void LateUpdate()
     {
         CameraMovement();
-        if(restituteCamera)
+
+        target.transform.rotation = transform.rotation;
+
+        if (restituteCamera)
             CameraRestitute();
     }
 

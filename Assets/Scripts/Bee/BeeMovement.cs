@@ -42,8 +42,6 @@ public class BeeMovement : MonoBehaviour {
     Vector3 prevPosition;       //last known good position
     Quaternion prevRotation;    //last known good rotation
 
-    public BeeCamera beeCam;
-
     // Use this for initialization
     void Start() 
     {
@@ -57,10 +55,6 @@ public class BeeMovement : MonoBehaviour {
     {
 
         handleMovement();
-
-        beeCam.BeeUpdate();
-
-        
 
         prevPosition = transform.position; //buffer last position for collisions (separate class perhaps?)
 
@@ -136,11 +130,11 @@ public class BeeMovement : MonoBehaviour {
         transform.position += velocity * dt;
 
         //decay force on X,Z axis
-        Vector3 velo = velocity; 
-        velo.x *= decay;
-        velo.z *= decay;
+        //Vector3 velo = velocity; 
+        //velo.x *= decay;
+        //velo.z *= decay;
 
-        velocity = velo;
+        velocity *= decay;
     }
  
     private void smoothClampVelocity(float max)

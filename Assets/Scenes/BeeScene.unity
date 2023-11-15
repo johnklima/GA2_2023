@@ -4600,7 +4600,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -4710,9 +4710,6 @@ GameObject:
   - component: {fileID: 721323936}
   - component: {fileID: 721323942}
   - component: {fileID: 721323943}
-  - component: {fileID: 721323945}
-  - component: {fileID: 721323946}
-  - component: {fileID: 721323947}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Player
@@ -4790,13 +4787,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721323935}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.68, y: 46.19, z: 15.93}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.19, z: 4.7}
   m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 888179484}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &721323942
 Rigidbody:
@@ -4812,7 +4809,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 1
 --- !u!81 &721323943
 AudioListener:
@@ -4822,63 +4819,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721323935}
   m_Enabled: 1
---- !u!114 &721323945
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721323935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f85a104fb8d7424b92a7c82bc6ffab9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  torqueScale: 100
-  thrustScale: 100
-  jumpScale: 100
-  impulseScale: 100
-  bounceScale: 100
-  GRAVITY_CONSTANT: 0
-  FORCE_CONSTANT: 100
-  TORQUE_CONSTANT: 5
-  decay: 0.8
-  velocity: {x: 0, y: 0, z: 0}
-  acceleration: {x: 0, y: 0, z: 0}
-  finalForce: {x: 0, y: 0, z: 0}
-  jump: {x: 0, y: 0, z: 0}
-  bounce: {x: 0, y: 0, z: 0}
-  thrust: {x: 0, y: 0, z: 0}
-  impulse: {x: 0, y: 0, z: 0}
-  torque: {x: 0, y: 0, z: 0}
-  mass: 1
-  maxVelocity: 30
-  energy: 10000
-  beeCam: {fileID: 888179485}
---- !u!114 &721323946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721323935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a491d805da1aa1f478dfadd280b69403, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &721323947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721323935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05d813e56b5926d42a0af0d236a83580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &888179481
 GameObject:
   m_ObjectHideFlags: 0
@@ -4890,6 +4830,8 @@ GameObject:
   - component: {fileID: 888179484}
   - component: {fileID: 888179483}
   - component: {fileID: 888179485}
+  - component: {fileID: 888179487}
+  - component: {fileID: 888179486}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -4947,14 +4889,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 888179481}
-  m_LocalRotation: {x: 0.14722525, y: -0, z: -0, w: 0.989103}
-  m_LocalPosition: {x: 26.68, y: 48.129997, z: 12.858}
-  m_LocalScale: {x: 1, y: 1.0848218, z: 0.95758903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.68, y: 48.129997, z: 15.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 721323939}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 16.932, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &888179485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4967,7 +4910,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e633beb9855614ba055bd8087d1a03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 721323939}
+  mouseSensitivity: 10
+  pitchMinMax: {x: -85, y: 85}
+  rotationSmoothTime: 0.12
+  lockCursor: 0
+  currentRotation: {x: 0, y: 0, z: 0}
+  yaw: 0
+  pitch: 0
+  roll: 0
+--- !u!114 &888179486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888179481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a491d805da1aa1f478dfadd280b69403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &888179487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888179481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f85a104fb8d7424b92a7c82bc6ffab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  torqueScale: 100
+  thrustScale: 100
+  jumpScale: 100
+  impulseScale: 100
+  bounceScale: 100
+  GRAVITY_CONSTANT: 0
+  FORCE_CONSTANT: 100
+  TORQUE_CONSTANT: 10
+  decay: 0.5
+  velocity: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  finalForce: {x: 0, y: 0, z: 0}
+  jump: {x: 0, y: 0, z: 0}
+  bounce: {x: 0, y: 0, z: 0}
+  thrust: {x: 0, y: 0, z: 0}
+  impulse: {x: 0, y: 0, z: 0}
+  torque: {x: 0, y: 0, z: 0}
+  mass: 1
+  maxVelocity: 30
+  energy: 10000
 --- !u!43 &1625968075
 Mesh:
   m_ObjectHideFlags: 0
@@ -5227,5 +5221,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

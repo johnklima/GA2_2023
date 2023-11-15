@@ -230,6 +230,33 @@ public class ItemPickup : MonoBehaviour
 
     }
 
+    Color oldColor;
+    Color newColor;
+    Material mat;
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        //turn on the light when I step into the space
+        if (spotLight)
+            spotLight.gameObject.SetActive(true);
+
+        //highlight via emission, first get the original emission.
+        //because it's a sub-property, it's a bit goofy
+        
+        mat = GetComponent<MeshRenderer>().material;
+        mat.EnableKeyword("_EMISSION");
+
+        //get and keep the old emission color (so we can restore if it had emission)
+        oldColor = mat.GetColor("_EmissionColor");
+
+        //create a new one (you can fiddle rgba here if you want)
+        //here you need to decide what color is the emission
+        newColor = new Color(0.5f, 0.5f, 0.5f);
+        
+        //set it
+        mat.SetColor("_EmissionColor", newColor );
+    
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -238,11 +265,9 @@ public class ItemPickup : MonoBehaviour
             return;  //code below does not execute if we are not the player
 
         isInTrigger = true;
-        
-        //turn on the light when I step into the space
-        if (spotLight)
-            spotLight.gameObject.SetActive(true);
-       
+
+        //in theory we could "pulse" the emission value here with newColor
+               
     }
 
     private void OnTriggerExit(Collider other)
@@ -257,6 +282,8 @@ public class ItemPickup : MonoBehaviour
         if (spotLight)
             spotLight.gameObject.SetActive(false);
 
+        //unhighlight emission
+        mat.SetColor("_EmissionColor", oldColor);  
     }
 
 }
