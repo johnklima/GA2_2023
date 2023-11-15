@@ -33,19 +33,19 @@ public class BeeInput : MonoBehaviour
         float inUp;
 
 
-        inSide = Input.GetAxis( "Horizontal" ); //A D strafe
-        inForward = Input.GetAxis("Vertical");  //W S drive forward backward
+        
+        inForward = Input.GetAxis("Vertical");  //W S fly forward backward
+        inSide = Input.GetAxis("Horizontal");   //A D strafe
+        inUp = Input.mouseScrollDelta.y;        //Elevation (helicopter)
 
-        inUp = Input.mouseScrollDelta.y;        //elevation (helicopter)
+        //mouse controls the forward view in an orbit manner, so WS moves in that direction
 
-        //mouse controls forward view in an orbit manner, so WS moves in that direction
-
-        //poke into BeeMovement physics
+        //poke into custom BeeMovement physics
+        //(critical to understand, this is on the CAMERA, not the Bee geometry)
         moveBee.applyThrust(transform.right * inSide );
         moveBee.applyThrust(transform.forward * inForward );
-
         moveBee.applyThrust(transform.up * inUp * 10 ); 
-        //a bit more thrust works best with scroll wheel
+        //a bit more thrust works best with scroll wheel as input
 
     }
 }

@@ -10,11 +10,7 @@ using UnityEngine;
 public class BeeCamera : MonoBehaviour
 {
 
-   
-    private Transform cameraPos;
-    
     [Header("Camera Settings")]
-
     [Range(0f, 20f)]
     public float mouseSensitivity = 10;
     public Vector2 pitchMinMax = new Vector2(-40, 85);
@@ -24,9 +20,10 @@ public class BeeCamera : MonoBehaviour
     public bool lockCursor;
 
     
-    Vector3 rotationSmoothVelocity;
-    Vector3 currentRotation;
+    Vector3 rotationSmoothVelocity;  //required for the method, not actualy important
+    Vector3 currentRotation;         //keep track of our current in Eulers
 
+    //the usual for a flight sim
     float yaw;
     float pitch;
     float roll;
@@ -35,9 +32,7 @@ public class BeeCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Assigning the private variable to the Camera Game Component
-        cameraPos = this.gameObject.transform;
-
+        //typical fps, though this is actually 3rd
         if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;

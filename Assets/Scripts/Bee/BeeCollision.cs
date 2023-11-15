@@ -9,9 +9,15 @@ using UnityEngine;
 
 public class BeeCollision : MonoBehaviour
 {
-    public BeeMovement movement;  
+    [Header("Bee Movement")]
     //could be acquired through the hierarchy, but that might change
-  
+    public BeeMovement movement;
+
+    [Header("Bee Camera Independence")]
+    //these are critical for how much freedom the bee has from the camera    
+    public float physicsDecay = 0.95f;
+    public float restRate = 1.0f;
+
     //regular physX object
     Rigidbody body;
 
@@ -45,16 +51,16 @@ public class BeeCollision : MonoBehaviour
 
         if(inCollision == false)
         {
-            float dt = Time.deltaTime;
+            float restTime = Time.deltaTime * restRate;
 
             //slerp back to it's rest state
-            transform.localPosition = Vector3.Lerp(transform.localPosition, initialPosition, dt);
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, initialRotation, dt);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, initialPosition, restTime);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, initialRotation, restTime);
 
         }
 
-        //rapidly decay it's physics velocity in any case? Yes.
-        body.velocity *= 0.9f;
+        //decay it's physics velocity in any case? Yes.
+        body.velocity *= physicsDecay;
 
     }
 
