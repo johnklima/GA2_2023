@@ -10,15 +10,13 @@ using UnityEngine;
 public class BeeInput : MonoBehaviour
 {
 
-    float moveSpeed = 10;
-    float turnSpeed = 100;
     BeeMovement moveBee = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        //give me my movement component
         moveBee = transform.GetComponent<BeeMovement>();
-
         
     }
 
@@ -26,30 +24,28 @@ public class BeeInput : MonoBehaviour
     void Update()
     {
 
-        if (moveBee.lockMovement())  //an old skool way, without param override it is a geter
-            return;
+        if (moveBee.lockMovement())  //an old skool way, without param override it is a getter
+            return;                  //no point being here if movement is locked (usually collision)
+
 
         float inForward = 0;
         float inSide = 0;
         float inUp;
 
 
-        inSide = Input.GetAxis( "Horizontal" );
-        inForward = Input.GetAxis("Vertical");
-        inUp = Input.mouseScrollDelta.y;
+        inSide = Input.GetAxis( "Horizontal" ); //A D strafe
+        inForward = Input.GetAxis("Vertical");  //W S drive forward backward
 
-        //solve for direct movement
-        
-        //transform.Rotate(new Vector3(0, inTurn * Time.deltaTime * turnSpeed, 0));
-        //transform.position += transform.forward * inForward * moveSpeed * Time.deltaTime;
-        
+        inUp = Input.mouseScrollDelta.y;        //elevation (helicopter)
 
+        //mouse controls forward view in an orbit manner, so WS moves in that direction
 
         //poke into BeeMovement physics
         moveBee.applyThrust(transform.right * inSide );
         moveBee.applyThrust(transform.forward * inForward );
 
-        moveBee.applyThrust(transform.up * inUp * 10 ); //works best with scroll wheel
+        moveBee.applyThrust(transform.up * inUp * 10 ); 
+        //a bit more thrust works best with scroll wheel
 
     }
 }

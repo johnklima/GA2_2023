@@ -45,7 +45,9 @@ public class BeeAnimator : MonoBehaviour
         /* 
          * lets just start by a simple, constricted, pitch yaw roll, based on what the camera
          * is doing. The Bee geom is a child of camera, in this situation, it is the camera
-         * that moves, not the Bee.
+         * that moves, not the Bee. This is to just get the Bee to angle around a little
+         * Nothing much happeneing yet, still need to feed a pitch/yaw/roll so everything
+         * below is actually zero at the moment. 
          */
         
         pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
