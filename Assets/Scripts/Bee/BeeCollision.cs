@@ -1,3 +1,8 @@
+/*
+ * (c) copyright 2023 John Klima
+ * Free for non-commercial use
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

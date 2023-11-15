@@ -1,4 +1,9 @@
 /*
+ * (c) copyright 2023 John Klima
+ * Free for non-commercial use
+ */
+
+/*
  * the purpose of this script is to move the bee geom around in its local coordinate 
  * system, reacting to collisions, pushing some of that information back into the
  * bee camera, and to create a pleasing, non-reptitious response to camera control.
