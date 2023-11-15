@@ -23,7 +23,7 @@ public class BeeMovement : MonoBehaviour {
     public float decayXZ = 0.5f;
     public float decayY = 0.99f;     //bigger number is LESS decay, 1.0 = none
 
-    [SerializeField] Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
+    public Vector3 velocity = new Vector3(0, 0, 0);                       //current direction and speed of movement
     [SerializeField] Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
     [SerializeField] Vector3 finalForce = new Vector3(0, 0, 0);           //final force to be applied this frame
 
@@ -43,6 +43,8 @@ public class BeeMovement : MonoBehaviour {
     Vector3 prevPosition;       //last known good position
     Quaternion prevRotation;    //last known good rotation
 
+    bool lockMove = false;      //lock the camera (usually for collision)
+
     // Use this for initialization
     void Start() 
     {
@@ -54,14 +56,24 @@ public class BeeMovement : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
-        handleMovement();
+        if( lockMove == false)
+            handleMovement();
 
         prevPosition = transform.position; //buffer last position for collisions (separate class perhaps?)
 
 
     }
     
+    public void lockMovement(bool lockmove)
+    {
+        lockMove = lockmove;    
+    }
+    public bool lockMovement()
+    {
+        return lockMove;
+    }
+
+
     public void applyJump(float force)
     {
 

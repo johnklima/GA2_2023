@@ -21,6 +21,9 @@ public class BeeInput : MonoBehaviour
     void Update()
     {
 
+        if (moveBee.lockMovement())  //an old skool way, without param override it is a geter
+            return;
+
         float inForward = 0;
         float inSide = 0;
         float inUp;
