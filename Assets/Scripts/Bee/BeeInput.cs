@@ -22,23 +22,26 @@ public class BeeInput : MonoBehaviour
     {
 
         float inForward = 0;
-        float inTurn = 0;
-        float inRoll = 0;
+        float inSide = 0;
+        float inUp;
 
 
-        inTurn = Input.GetAxis( "Horizontal" );
+        inSide = Input.GetAxis( "Horizontal" );
         inForward = Input.GetAxis("Vertical");
+        inUp = Input.mouseScrollDelta.y;
 
         //solve for direct movement
         
-        transform.Rotate(new Vector3(0, inTurn * Time.deltaTime * turnSpeed, 0));
-        transform.position += transform.forward * inForward * moveSpeed * Time.deltaTime;
+        //transform.Rotate(new Vector3(0, inTurn * Time.deltaTime * turnSpeed, 0));
+        //transform.position += transform.forward * inForward * moveSpeed * Time.deltaTime;
         
 
 
         //poke into BeeMovement physics
-        //moveBee.applyTorque(transform.up * inTurn );
-        //moveBee.applyThrust(transform.forward * inForward );
+        moveBee.applyThrust(transform.right * inSide );
+        moveBee.applyThrust(transform.forward * inForward );
+
+        moveBee.applyThrust(transform.up * inUp * 10 ); //works best with scroll wheel
 
     }
 }

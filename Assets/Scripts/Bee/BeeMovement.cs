@@ -19,8 +19,9 @@ public class BeeMovement : MonoBehaviour {
     public float FORCE_CONSTANT = 100.0f;
     public float TORQUE_CONSTANT = 10.0f;
 
-    public float decay = 0.5f;                                  //reduce velocity over time (friction???)
-
+    //reduce velocity over time (friction???)
+    public float decayXZ = 0.5f;
+    public float decayY = 0.99f;     //bigger number is LESS decay, 1.0 = none
 
     [SerializeField] Vector3 velocity = new Vector3(0, 0, 0);             //current direction and speed of movement
     [SerializeField] Vector3 acceleration = new Vector3(0, 0, 0);         //movement controlled by player movement force and gravity
@@ -124,17 +125,18 @@ public class BeeMovement : MonoBehaviour {
         torque = Vector3.zero;
 
         //clamp velocity (terminal velocity)
-        //smoothClampVelocity(maxVelocity); //meters per second max
+        smoothClampVelocity(maxVelocity); //meters per second max
 
         //move the object
         transform.position += velocity * dt;
 
-        //decay force on X,Z axis
-        //Vector3 velo = velocity; 
-        //velo.x *= decay;
-        //velo.z *= decay;
+        //decayXZ force on X,Z axis
+        Vector3 velo = velocity; 
+        velo.x *= decayXZ;
+        velo.z *= decayXZ;
+        velo.y *= decayY;
 
-        velocity *= decay;
+        velocity = velo;
     }
  
     private void smoothClampVelocity(float max)
