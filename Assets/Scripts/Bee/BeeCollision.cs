@@ -12,6 +12,7 @@ public class BeeCollision : MonoBehaviour
     [Header("Bee Movement")]
     //could be acquired through the hierarchy, but that might change
     public BeeMovement movement;
+    public BeeCamera camera;
 
     [Header("Bee Camera Independence")]
     //these are critical for how much freedom the bee has from the camera    
@@ -56,7 +57,12 @@ public class BeeCollision : MonoBehaviour
             //slerp back to it's rest state
             transform.localPosition = Vector3.Lerp(transform.localPosition, initialPosition, restTime);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, initialRotation, restTime);
-
+            
+        }
+        else //continue to inform camera we are colliding
+        {
+            //reduce mouse sensitivity, but don't kill it
+            camera.SetMouseSensitivity(1.0f);
         }
 
         //decay it's physics velocity in any case? Yes.
@@ -83,6 +89,10 @@ public class BeeCollision : MonoBehaviour
 
         //if I am colliding I will not influence movement
         movement.lockMovement(true);
+        //reduce mouse sensitivity, but don't kill it
+        camera.SetMouseSensitivity(1.0f);
+        camera.DeCouple();
+        
 
     }
     private void OnCollisionExit(Collision collision)
@@ -90,6 +100,7 @@ public class BeeCollision : MonoBehaviour
         //all good, my body is out of trouble
         inCollision = false;
         movement.lockMovement(false);
+        camera.Couple();
     }
 
 }
