@@ -73,13 +73,17 @@ public class BeeCamera : MonoBehaviour
 
     void CameraMovement()
     {
+        
+        //clamping lower than mouse sensitivity allows for spritely
+        //initial movement
+
         float x = Input.GetAxis("Mouse X") * mouseSensitivity;
-        x = Mathf.Clamp(x, -2, 2);
+        x = Mathf.Clamp(x, -4, 4);
 
         yaw += x;
 
         float y = Input.GetAxis("Mouse Y") * mouseSensitivity;
-        y = Mathf.Clamp(y, -2, 2);
+        y = Mathf.Clamp(y, -4, 4);
 
         pitch -= y;
 
