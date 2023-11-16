@@ -56,7 +56,7 @@ public class BeeCamera : MonoBehaviour
         //always resititute back to original mouse sensitivity (usually changed in collision)
         if(initialSensitivity != mouseSensitivity)
         {
-            mouseSensitivity = Mathf.Lerp(mouseSensitivity, initialSensitivity, Time.deltaTime * 0.1f);
+            mouseSensitivity = Mathf.Lerp(mouseSensitivity, initialSensitivity, Time.deltaTime * 5);
             if(Mathf.Abs(initialSensitivity - mouseSensitivity) < 0.01f)
             {
                 mouseSensitivity = initialSensitivity;
@@ -74,12 +74,12 @@ public class BeeCamera : MonoBehaviour
     void CameraMovement()
     {
         float x = Input.GetAxis("Mouse X") * mouseSensitivity;
-        x = Mathf.Clamp(x, -3, 3);
+        x = Mathf.Clamp(x, -2, 2);
 
         yaw += x;
 
         float y = Input.GetAxis("Mouse Y") * mouseSensitivity;
-        y = Mathf.Clamp(y, -3, 3);
+        y = Mathf.Clamp(y, -2, 2);
 
         pitch -= y;
 
@@ -91,7 +91,7 @@ public class BeeCamera : MonoBehaviour
     }
     public void SetMouseSensitivity(float sensitivity)
     {
-        initialSensitivity = mouseSensitivity;
+        
         mouseSensitivity = sensitivity;
 
     }
