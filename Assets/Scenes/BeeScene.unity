@@ -11165,7 +11165,7 @@ MonoBehaviour:
   impulseScale: 100
   bounceScale: 100
   GRAVITY_CONSTANT: 0
-  FORCE_CONSTANT: 100
+  FORCE_CONSTANT: 50
   TORQUE_CONSTANT: 10
   decayXZ: 0.8
   decayY: 0.95

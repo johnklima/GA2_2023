@@ -147,15 +147,20 @@ public class BeeMovement : MonoBehaviour {
         //move the object
         transform.position += velocity * dt;
 
+    }
+    private void FixedUpdate()
+    {
+        //On my machine constant 0.02
+        //On yours?
+
         //decayXZ force on X,Z axis
-        Vector3 velo = velocity; 
+        Vector3 velo = velocity;
         velo.x *= decayXZ;
         velo.z *= decayXZ;
         velo.y *= decayY;
 
         velocity = velo;
     }
- 
     private void smoothClampVelocity(float max)
     {
         //GENERAL RULE OF VELOCITY : don't let them go too fast!!!        
