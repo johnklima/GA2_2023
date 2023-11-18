@@ -11168,7 +11168,7 @@ MonoBehaviour:
   FORCE_CONSTANT: 50
   TORQUE_CONSTANT: 10
   decayXZ: 0.8
-  decayY: 0.95
+  decayY: 0.8
   velocity: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
   finalForce: {x: 0, y: 0, z: 0}

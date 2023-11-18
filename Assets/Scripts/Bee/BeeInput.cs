@@ -52,7 +52,7 @@ public class BeeInput : MonoBehaviour
         //(critical to understand, this is on the CAMERA, not the Bee geometry)
         moveBee.applyThrust(transform.right * inSide );
         moveBee.applyThrust(transform.forward * inForward );
-        moveBee.applyThrust(transform.up * inUp * 10 ); 
+        moveBee.applyThrust(transform.up * inUp * 5 ); 
         //a bit more thrust works best with scroll wheel as input
 
     }
