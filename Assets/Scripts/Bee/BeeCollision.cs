@@ -83,8 +83,6 @@ public class BeeCollision : MonoBehaviour
         //into the bee body, and then let the unity physics engine handle a bounce
         body.velocity = movement.velocity;
 
-        //we then bring it back to a good position and hopefully its local
-        //and its global will be in line
         inCollision = true;
 
         //if I am colliding I will not influence movement
@@ -93,6 +91,18 @@ public class BeeCollision : MonoBehaviour
         camera.SetMouseSensitivity(1.0f);
         camera.DeCouple();
         
+
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        //frustrate any restitution processes
+        inCollision = true;
+
+        //if I am colliding I will not influence movement
+        movement.lockMovement(true);
+        //reduce mouse sensitivity, but don't kill it
+        camera.SetMouseSensitivity(1.0f);
+        //camera.DeCouple();
 
     }
     private void OnCollisionExit(Collision collision)

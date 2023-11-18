@@ -32,12 +32,20 @@ public class BeeInput : MonoBehaviour
         float inSide = 0;
         float inUp;
 
-
-        
-        inForward = Input.GetAxis("Vertical");  //W S fly forward backward
-        inSide = Input.GetAxis("Horizontal");   //A D strafe
+        //mouse first
         inUp = Input.mouseScrollDelta.y;        //Elevation (helicopter)
+        if(Input.GetMouseButton(0))
+            inForward =  1.0f;
 
+        if (Input.GetMouseButton(1))
+            inForward = -1.0f;
+
+        //now check keyboard
+        if (inForward == 0)
+            inForward = Input.GetAxis("Vertical");  //W S fly forward backward
+        if(inSide == 0)
+            inSide = Input.GetAxis("Horizontal");   //A D strafe
+        
         //mouse controls the forward view in an orbit manner, so WS moves in that direction
 
         //poke into custom BeeMovement physics
