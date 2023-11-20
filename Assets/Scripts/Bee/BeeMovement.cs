@@ -115,7 +115,7 @@ public class BeeMovement : MonoBehaviour {
         float dt = Time.deltaTime;
 
         //cheating physics on torque for now
-        transform.Rotate(torque * dt);
+        //transform.Rotate(torque * dt);
 
         //reset final force to the initial force of gravity
         finalForce.Set(0, GRAVITY_CONSTANT * mass, 0);
